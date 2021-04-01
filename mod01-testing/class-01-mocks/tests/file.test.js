@@ -20,9 +20,9 @@ const successExpected = [
     "profession": "Nurse",
     "birthYear": 1994
   }
-];
+]
 
-(async () => {
+;(async () => {
     {
         const filePath = '../mocks/emptyFile-invalid.csv'
         const rejection = new Error(error.FILE_LENGTH_ERROR_MESSAGE)

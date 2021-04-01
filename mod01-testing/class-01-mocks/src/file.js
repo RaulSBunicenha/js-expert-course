@@ -1,6 +1,6 @@
 const { readFile } = require('fs/promises')
 const { join } = require('path')
-const User = require('../tests/user')
+const User = require('./user')
 const constants = require('./constants')
 const DEFAULT_OPTIONS = {
     maxLines: 3,
