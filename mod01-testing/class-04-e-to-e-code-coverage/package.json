@@ -4,13 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha -w *.test.js"
+    "test": "npx mocha -w *.test.js",
+    "clean:cov": "rimraf -r ./coverage/ .nyc_output",
+    "test:cov": "npm run clean:cov && npx nyc npx mocha --parallel *.test.js",
+    "cov:html": "npx http-server -o ./coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "http-server": "^0.12.3",
     "mocha": "^8.3.2",
+    "nyc": "^15.1.0",
+    "rimraf": "^3.0.2",
     "supertest": "^6.1.3"
   }
 }

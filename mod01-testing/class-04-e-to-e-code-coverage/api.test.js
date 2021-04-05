@@ -12,7 +12,9 @@ describe('API Suite test', () => {
             
             assert.deepStrictEqual(response.text, 'contact us page')
         })
+    })
 
+    describe('/hello', () => {
         it('should request an inexistent route /hi and redirect to /hello', async () => {
             const response = await request(app)
                 .get('/hi')
@@ -21,4 +23,25 @@ describe('API Suite test', () => {
             assert.deepStrictEqual(response.text, 'Hello World!')
         })
     })
+
+    describe('/login', () => {
+        it('should login successfully on the login route and return HTTP Status 200', async () => {
+            const response = await request(app)
+                .post('/login')
+                .send({ username: 'raul', password: 'raul' })
+                .expect(200)
+
+            assert.deepStrictEqual(response.text, 'Loggin has succeeded!')
+        })
+
+        it('should unauthorize a request when requesting it using wrong credentials', async () => {
+            const response = await request(app)
+                .post('/login')
+                .send({ username: 'rauls', password: 'raul' })
+                .expect(401)
+
+            assert.deepStrictEqual(response.text, 'Logging failed!')
+        })
+    })
+
 })
