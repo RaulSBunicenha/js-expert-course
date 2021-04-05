@@ -1,0 +1,16 @@
+{
+  "name": "class-04-e-to-e-code-coverage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha -w *.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^8.3.2",
+    "supertest": "^6.1.3"
+  }
+}
