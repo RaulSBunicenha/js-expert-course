@@ -40,6 +40,7 @@ describe('API Suite test', () => {
                 .send({ username: 'rauls', password: 'raul' })
                 .expect(401)
 
+            assert.ok(response.unauthorized)
             assert.deepStrictEqual(response.text, 'Logging failed!')
         })
     })
