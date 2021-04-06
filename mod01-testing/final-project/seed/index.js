@@ -41,8 +41,8 @@ for (let index = 0; index < ITEMS_AMOUT; index++) {
 
 const write = async (filename, data) => writeFile(join(seederBaseFolder, filename), JSON.stringify(data))
 
-;(async () => {
-    await write('cars.json', cars)
-    await write('carCategories.json', [carCategory])
-    await write('customers.json', customers)
-})()
+    ; (async () => {
+        await write('cars.json', cars)
+        await write('carCategories.json', [carCategory])
+        await write('customers.json', customers)
+    })()
