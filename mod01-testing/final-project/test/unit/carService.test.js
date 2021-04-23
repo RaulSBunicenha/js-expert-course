@@ -9,7 +9,8 @@ const carDatabase = join(__dirname, '../../database', 'car.json')
 
 const mocks = {
     validCarCategory: require('../mocks/valid-carCategory.json'),
-    validCar: require('../mocks/valid-car.json')
+    validCar: require('../mocks/valid-car.json'),
+    validCustomer: require('../mocks/valid-customer.json')
 }
 
 describe('CarService Suite Tests', () => {
@@ -72,5 +73,29 @@ describe('CarService Suite Tests', () => {
         expect(carService.chooseRandomCar.calledOnce).to.be.ok
         expect(carService.carRepository.find.calledWithExactly(car.id)).to.be.ok
         expect(result).to.be.deep.equal(expected)
+    })
+
+    it('given a carCategory, customer and numberOfDays it should calculate final amount in real', async () => {
+        const customer = Object.create(mocks.validCustomer)
+        customer.age = 50
+
+        const carCategory = Object.create(mocks.validCarCategory)
+        carCategory.price = 37.6
+
+        const numberOfDays = 5
+
+        sandbox.stub(
+            carService,
+            "taxesBasedOnAge"
+        ).get(() => [{ from: 31, to: 100, then: 1.3 }])
+
+        const expected = carService.currencyFormat.format(244.40)
+        const result = carService.calculateFinalPrice(
+            customer,
+            carCategory,
+            numberOfDays
+        )
+
+        expect(result).to.be.deep.equal(result)
     })
 })
