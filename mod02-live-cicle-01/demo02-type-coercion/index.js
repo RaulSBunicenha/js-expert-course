@@ -96,7 +96,7 @@ const { types } = require('util')
     console.assert(String(new Date(item)) === 'Invalid Date', 'Call Symbol.toPrimitive function when is trying to convert to Date')
     console.assert(Boolean(item) === true, 'Call Symbol.toPrimitive function when is trying to convert to Boolean')
 
-    console.log('New Object', {
+    console.log('New Object [Clone and Change]', {
         ...item,
         age: 24
     })
