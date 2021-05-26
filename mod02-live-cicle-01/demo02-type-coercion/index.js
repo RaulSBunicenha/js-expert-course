@@ -1,3 +1,5 @@
+const { types } = require('util')
+
 {
     9999999999999999 // 16
     // 10000000000000000
@@ -86,9 +88,16 @@
         return {
             string: JSON.stringify(this),
             number: this.name.length + this.age
-        }[coercionType]
+        }[coercionType] || types.string
     }
 
     console.assert(String(item) === '{"name":"Raul","age":25}', 'Call Symbol.toPrimitive function when is trying to convert to string')
     console.assert(Number(item) === 29, 'Call Symbol.toPrimitive function when is trying to convert to number')
+    console.assert(String(new Date(item)) === 'Invalid Date', 'Call Symbol.toPrimitive function when is trying to convert to Date')
+    console.assert(Boolean(item) === true, 'Call Symbol.toPrimitive function when is trying to convert to Boolean')
+
+    console.log('New Object', {
+        ...item,
+        age: 24
+    })
 }
