@@ -4,6 +4,7 @@ import chalkTable from 'chalk-table'
 import readLine from 'readline'
 
 import database from '../database.json'
+import Person from './person.js'
 
 DraftLog(console).addLineListener(process.stdin)
 
@@ -18,7 +19,10 @@ const options = {
   ]
 }
 
-const table = chalkTable(options, database)
+const table = chalkTable(
+  options,
+  database.map(e => new Person(e).formatted())
+)
 
 const print = console.draft(table)
 
