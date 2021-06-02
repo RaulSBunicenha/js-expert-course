@@ -6,6 +6,8 @@ import readLine from 'readline'
 import database from '../database.json'
 import Person from './person.js'
 
+const DEFAULT_LANG = 'pt-BR'
+
 DraftLog(console).addLineListener(process.stdin)
 
 const options = {
@@ -21,7 +23,7 @@ const options = {
 
 const table = chalkTable(
   options,
-  database.map(e => new Person(e).formatted())
+  database.map(e => new Person(e).formatted(DEFAULT_LANG))
 )
 
 const print = console.draft(table)
