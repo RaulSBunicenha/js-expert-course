@@ -1,44 +1,13 @@
-import DraftLog from 'draftlog'
-import chalk from 'chalk'
-import chalkTable from 'chalk-table'
-import readLine from 'readline'
+import Person from './person.js'
+import TerminalController from './terminalController.js'
 
 import database from '../database.json'
-import Person from './person.js'
-
 const DEFAULT_LANG = 'pt-BR'
 
-DraftLog(console).addLineListener(process.stdin)
+const terminalController = new TerminalController(Person)
 
-const options = {
-  leftPad: 2,
-  columns: [
-    { field: "id", name: chalk.cyan("ID") },
-    { field: "vehicles", name: chalk.cyan("Vehicles") },
-    { field: "kmTraveled", name: chalk.cyan("Km Traveled") },
-    { field: "from", name: chalk.cyan("From") },
-    { field: "to", name: chalk.cyan("To") }
-  ]
-}
+terminalController.initializeTerminal(database, DEFAULT_LANG)
+  
+const name = await terminalController.question('What is your name?')
 
-const table = chalkTable(
-  options,
-  database.map(e => new Person(e).formatted(DEFAULT_LANG))
-)
-
-const print = console.draft(table)
-
-// setInterval(() => {
-//   database.push({ id: 'raul123', from: 'raul123' })
-//   const table = chalkTable(options, database)
-//   print(table)
-// }, 3000)
-
-const terminal = readLine.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
-
-// terminal.question('What is you name? ', msg => {
-//   console.log('The name is: ', msg)
-// })
+console.log('Your name is: ', name)
