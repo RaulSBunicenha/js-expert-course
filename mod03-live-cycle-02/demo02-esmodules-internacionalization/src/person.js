@@ -34,4 +34,19 @@ export default class Person {
         )
     }
   }
+
+  static generateInstanceFromString (text) {
+    const EMPTYSPACE = ' '
+    const [ id, vehicles, kmTraveled, from, to ] = text.split(EMPTYSPACE)
+    
+    const person = new Person({
+      id,
+      kmTraveled,
+      from,
+      to,
+      vehicles: vehicles.split(',')
+    })
+
+    return person
+  }
 }

@@ -13,17 +13,6 @@ export default class TerminalController {
     this.data = []
   }
 
-  initializeTerminal (database, lang) {
-    DraftLog(console).addLineListener(process.stdin)
-
-    this.terminal = readLine.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    })
-
-    this.initializeTable(database, lang)
-  }
-
   initializeTable (database, lang) {
     this.data = database.map(
       e => new this.PersonClass(e).formatted(lang)
@@ -47,8 +36,23 @@ export default class TerminalController {
       ]
     }
   }
+
+  initializeTerminal (database, lang) {
+    DraftLog(console).addLineListener(process.stdin)
+
+    this.terminal = readLine.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    })
+
+    this.initializeTable(database, lang)
+  }
   
-  question (msg) {
+  closeTerminal () {
+    this.terminal.close()
+  }
+
+  question (msg = '') {
     return new Promise(resolve => this.terminal.question(`${msg} `, resolve))    
   }
 }
