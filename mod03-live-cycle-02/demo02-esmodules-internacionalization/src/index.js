@@ -17,8 +17,9 @@ async function mainLoop () {
       console.log('process finished!')
       return;
     }
+    
     const person = Person.generateInstanceFromString(userInput)
-    console.log(person.formatted(DEFAULT_LANG))
+    terminalController.updateTable(person.formatted(DEFAULT_LANG))
 
     return mainLoop()
   } catch (e) {

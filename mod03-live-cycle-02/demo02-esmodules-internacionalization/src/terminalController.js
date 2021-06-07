@@ -37,6 +37,11 @@ export default class TerminalController {
     }
   }
 
+  updateTable (item) {
+    this.data.push(item)
+    this.print(chalkTable(this.getTableOptions(), this.data))
+  }
+
   initializeTerminal (database, lang) {
     DraftLog(console).addLineListener(process.stdin)
 
