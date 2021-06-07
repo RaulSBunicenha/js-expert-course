@@ -6,8 +6,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx nodemon --ignore database.json --exec node --experimental-json-modules src/",
-    "test": "npx mocha -w --parallel test/**/*.test.js",
-    "test:cov": "npx nyc npx mocha --parallel test/**/*.test.js"
+    "test": "npx mocha -w --parallel test/*.test.js",
+    "clean:cov": "rimraf -r ./coverage/ .nyc_output",
+    "test:cov": "npm run clean:cov && npx nyc npx mocha --parallel test/*.test.js",
+    "cov:html": "npx http-server -o ./coverage/"
   },
   "engines": {
     "node": "v15.4.0"
@@ -22,9 +24,11 @@
   },
   "devDependencies": {
     "chai": "^4.3.4",
+    "http-server": "^0.12.3",
     "mocha": "^8.4.0",
     "nodemon": "2.0.7",
     "nyc": "^15.1.0",
+    "rimraf": "^3.0.2",
     "sinon": "^9.2.4"
   }
 }

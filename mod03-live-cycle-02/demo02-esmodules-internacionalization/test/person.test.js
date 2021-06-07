@@ -9,13 +9,33 @@ describe('Person', () => {
     )
     
     const expected = new Person({
-      id: 1, 
+      id: '1', 
       vehicles: ['Bike', 'Car'],
-      kmTraveled: 1500,
+      kmTraveled: '1500',
       from: '2011-06-07',
       to: '2021-06-07'
     })
 
-    expect(String(person)).to.be.deep.equal(String(expected))
+    expect(person).to.be.deep.equal(expected)
+  })
+
+  it('should format values', () => {
+    const person = new Person({
+      id: '1', 
+      vehicles: ['Bike', 'Car'],
+      kmTraveled: '1500',
+      from: '2011-06-07',
+      to: '2021-06-07'
+    })
+
+    const expected = {
+      id: 1,
+      vehicles: 'Bike and Car',
+      kmTraveled: '1,500 km',
+      from: 'June 07, 2011',
+      to: 'June 07, 2021'
+    }
+
+    expect(person.formatted()).to.be.deep.equal(expected)
   })
 })
