@@ -49,8 +49,30 @@ async function* systemInfo () {
   yield { dir }
 }
 
-;(async () => {
-  for await (const item of systemInfo()) {
-    console.log('For await', item)
+// ;(async () => {
+//   for await (const item of systemInfo()) {
+//     console.log('For await', item)
+//   }
+// })()
+
+async function* entries (generator) {
+  try {
+      while (true) {
+        const result = await generator.next()
+        if (result.done) break;
+        yield result.value
+      }
+  } finally {
+    return null
   }
-})()
+}
+
+// (async () => {
+//   const generator = systemInfo()
+  
+//   console.log(await entries(generator).next())
+//   console.log(await entries(generator).next())
+//   console.log(await entries(generator).next())
+//   console.log(await entries(generator).next())
+//   console.log(await entries(generator).next())
+// })()
